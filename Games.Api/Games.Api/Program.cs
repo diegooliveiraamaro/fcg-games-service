@@ -1,23 +1,66 @@
+using Games.Api.Infrastructure.Events;
+using Games.Api.Infrastructure.Persistence;
+using Games.Api.Infrastructure.Search;
+using Microsoft.EntityFrameworkCore;
+using Nest;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// =======================
+// SERVICES
+// =======================
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// DbContext (APENAS UMA VEZ)
+builder.Services.AddDbContext<GamesDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Default"))
+);
+
+// Event Sourcing
+builder.Services.AddScoped<EventStore>();
+
+// Elasticsearch
+var elasticUri = builder.Configuration["Elastic:Uri"] ?? "http://localhost:9200";
+
+var settings = new ConnectionSettings(new Uri(elasticUri))
+    .DefaultIndex("games");
+
+var client = new ElasticClient(settings);
+
+builder.Services.AddSingleton<IElasticClient>(client);
+builder.Services.AddScoped<IGameSearchService, GameSearchService>();
+
+// =======================
+// BUILD
+// =======================
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+// =======================
+// MIDDLEWARE
+// =======================
+
+// Swagger SEM restrição de ambiente (ECS precisa disso)
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Games API v1");
+    c.RoutePrefix = "swagger";
+});
+
+app.UseRouting();
 
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Health check para ALB / ECS
+app.MapGet("/health", () => Results.Ok("Healthy"));
+
+// ESSENCIAL para Docker / ECS
+app.Urls.Add("http://0.0.0.0:80");
 
 app.Run();

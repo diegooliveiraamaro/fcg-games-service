@@ -1,0 +1,67 @@
+name: Deploy Game API
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout do código
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2️⃣ Configurar credenciais da AWS
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      # 3️⃣ Login no Amazon ECR
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      # 4️⃣ Build da imagem Docker + Push para o ECR
+      - name: Build and push Docker image
+        env:
+          ECR_REPO: ${{ vars.ECR_GAMES_REPO }}
+        run: |
+          echo "Obtendo URI do repositório ECR..."
+          IMAGE_URI=$(aws ecr describe-repositories \
+            --repository-names $ECR_REPO \
+            --query 'repositories[0].repositoryUri' \
+            --output text)
+
+          echo "Imagem gerada: $IMAGE_URI"
+
+          docker build \
+            -f Game.Api/Game.Api/Dockerfile \
+            -t $IMAGE_URI:latest \
+            Game.Api/Game.Api
+
+          docker push $IMAGE_URI:latest
+
+          echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_ENV
+
+      # 5️⃣ Renderizar nova Task Definition (atualiza a imagem)
+      - name: Render ECS task definition
+        id: render-task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ecs-task-definition.json
+          container-name: fcg-game-container
+          image: ${{ env.IMAGE_URI }}:latest
+
+      # 6️⃣ Deploy no ECS
+      - name: Deploy to ECS
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.render-task-def.outputs.task-definition }}
+          service: ${{ vars.ECS_SERVICE }}
+          cluster: ${{ vars.ECS_CLUSTER }}
+          wait-for-service-stability: true
