@@ -54,7 +54,7 @@ jobs:
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: ecs-task-definition.json
-          container-name: fcg-game-container
+          container-name: fcg-games-container
           image: ${{ env.IMAGE_URI }}:latest
 
       # 6️⃣ Deploy no ECS
