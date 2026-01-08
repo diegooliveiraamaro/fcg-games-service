@@ -40,7 +40,7 @@ jobs:
           echo "Imagem gerada: $IMAGE_URI"
 
           docker build \
-            -f Games.Api/Game.Api/Dockerfile \
+            -f Games.Api/Games.Api/Dockerfile \
             -t $IMAGE_URI:latest \
             Games.Api/Games.Api
 
