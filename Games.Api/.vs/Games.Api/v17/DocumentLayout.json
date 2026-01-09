@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "D:\\Projetos\\FCG\\fcg-games-service\\Games.Api\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2CCA72A3-2AE3-409F-BB58-FB08EE1B2B52}|Games.Api\\Games.Api.csproj|d:\\projetos\\fcg\\fcg-games-service\\games.api\\games.api\\controllers\\gamescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2CCA72A3-2AE3-409F-BB58-FB08EE1B2B52}|Games.Api\\Games.Api.csproj|solutionrelative:games.api\\controllers\\gamescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2CCA72A3-2AE3-409F-BB58-FB08EE1B2B52}|Games.Api\\Games.Api.csproj|d:\\projetos\\fcg\\fcg-games-service\\games.api\\games.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2CCA72A3-2AE3-409F-BB58-FB08EE1B2B52}|Games.Api\\Games.Api.csproj|solutionrelative:games.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2CCA72A3-2AE3-409F-BB58-FB08EE1B2B52}|Games.Api\\Games.Api.csproj|d:\\projetos\\fcg\\fcg-games-service\\games.api\\games.api\\controllers\\gamescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2CCA72A3-2AE3-409F-BB58-FB08EE1B2B52}|Games.Api\\Games.Api.csproj|solutionrelative:games.api\\controllers\\gamescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2CCA72A3-2AE3-409F-BB58-FB08EE1B2B52}|Games.Api\\Games.Api.csproj|d:\\projetos\\fcg\\fcg-games-service\\games.api\\games.api\\infrastructure\\events\\eventbridgepublisher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -82,7 +82,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
@@ -94,18 +94,17 @@
               "RelativeToolTip": "Games.Api\\Infrastructure\\Events\\EventBridgePublisher.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-09T16:04:08.113Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-09T16:04:08.113Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "GamesController.cs",
               "DocumentMoniker": "D:\\Projetos\\FCG\\fcg-games-service\\Games.Api\\Games.Api\\Controllers\\GamesController.cs",
               "RelativeDocumentMoniker": "Games.Api\\Controllers\\GamesController.cs",
-              "ToolTip": "D:\\Projetos\\FCG\\fcg-games-service\\Games.Api\\Games.Api\\Controllers\\GamesController.cs*",
-              "RelativeToolTip": "Games.Api\\Controllers\\GamesController.cs*",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAIwGwAAAAhAAAAAAAAAA==",
+              "ToolTip": "D:\\Projetos\\FCG\\fcg-games-service\\Games.Api\\Games.Api\\Controllers\\GamesController.cs",
+              "RelativeToolTip": "Games.Api\\Controllers\\GamesController.cs",
+              "ViewState": "AgIAAE0AAAAAAAAAAAAIwIUAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-08T01:13:29.95Z",
               "EditorCaption": ""
@@ -120,8 +119,7 @@
               "RelativeToolTip": "Games.Api\\Domain\\Game.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T01:11:45.175Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T01:11:45.175Z"
             },
             {
               "$type": "Document",
@@ -137,13 +135,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Projetos\\FCG\\fcg-games-service\\Games.Api\\Games.Api\\Program.cs",
               "RelativeDocumentMoniker": "Games.Api\\Program.cs",
               "ToolTip": "D:\\Projetos\\FCG\\fcg-games-service\\Games.Api\\Games.Api\\Program.cs",
               "RelativeToolTip": "Games.Api\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAIAwwCYAAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAIAwwCUAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-08T01:12:36.512Z",
               "EditorCaption": ""
@@ -158,8 +156,7 @@
               "RelativeToolTip": "Games.Api\\Infrastructure\\Events\\EventStore.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T01:24:37.157Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T01:24:37.157Z"
             },
             {
               "$type": "Document",
@@ -195,8 +192,7 @@
               "RelativeToolTip": "Games.Api\\Infrastructure\\Events\\GamePurchasedEvent.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T01:23:34.697Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T01:23:34.697Z"
             },
             {
               "$type": "Document",
@@ -208,8 +204,7 @@
               "RelativeToolTip": "Games.Api\\DTOs\\Games\\CreateGameRequestDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T01:29:29.053Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T01:29:29.053Z"
             },
             {
               "$type": "Document",
@@ -221,8 +216,7 @@
               "RelativeToolTip": "Games.Api\\Infrastructure\\Events\\IEvent.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T01:22:40.23Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T01:22:40.23Z"
             },
             {
               "$type": "Document",
@@ -258,8 +252,7 @@
               "RelativeToolTip": "Games.Api\\Infrastructure\\Events\\GameCreatedEvent.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T01:23:06.257Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T01:23:06.257Z"
             },
             {
               "$type": "Document",

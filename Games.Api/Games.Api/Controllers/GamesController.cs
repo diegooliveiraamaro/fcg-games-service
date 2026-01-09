@@ -16,17 +16,20 @@ namespace Games.Api.Controllers
         private readonly GamesDbContext _db;
         private readonly IGameSearchService _search;
         private readonly IAmazonLambda _lambdaClient;
+        private readonly IAmazonEventBridge _eventBridge;
 
         public GamesController(
             GamesDbContext db,
             IGameSearchService search,
             IAmazonLambda lambdaClient,
-            ILogger<GamesController> logger)
+            ILogger<GamesController> logger,
+            IAmazonEventBridge eventBridge)
         {
             _db = db;
             _search = search;
             _lambdaClient = lambdaClient;
             _logger = logger;
+            _eventBridge = eventBridge;
         }
 
         [HttpGet]
@@ -76,7 +79,7 @@ namespace Games.Api.Controllers
 
 
         [HttpPost("{id}/purchase")]
-        public async Task<IActionResult> Purchase(Guid id, [FromQuery] Guid userId, [FromServices] IAmazonEventBridge eventBridge)
+        public async Task<IActionResult> Purchase(Guid id, [FromQuery] Guid userId, [FromServices] )
         {
             var game = await _db.Games.FindAsync(id);
             if (game == null) return NotFound();
@@ -125,7 +128,7 @@ namespace Games.Api.Controllers
                 }
             };
 
-            await eventBridge.PutEventsAsync(request);
+            await _eventBridge.PutEventsAsync(request);
 
             return Ok();
         }
