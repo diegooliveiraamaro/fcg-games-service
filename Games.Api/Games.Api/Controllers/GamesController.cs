@@ -1,4 +1,5 @@
-﻿using Games.Api.Application.DTOs.Games;
+﻿using Amazon.Lambda;
+using Games.Api.Application.DTOs.Games;
 using Games.Api.Domain;
 using Games.Api.Infrastructure.Persistence;
 using Games.Api.Infrastructure.Search;
@@ -12,13 +13,17 @@ namespace Games.Api.Controllers
     {
         private readonly GamesDbContext _db;
         private readonly IGameSearchService _search;
+        private readonly IAmazonLambda _lambdaClient;
 
         public GamesController(
             GamesDbContext db,
-            IGameSearchService search)
+            IGameSearchService search,
+            IAmazonLambda lambdaClient)
         {
             _db = db;
             _search = search;
+            _lambdaClient = lambdaClient;
+            _lambdaClient = lambdaClient;
         }
 
         [HttpGet]
@@ -69,22 +74,27 @@ namespace Games.Api.Controllers
         [HttpPost("{id}/purchase")]
         public async Task<IActionResult> Purchase(Guid id, [FromQuery] Guid userId)
         {
+            // 1️⃣ Buscar o jogo
             var game = await _db.Games.FindAsync(id);
             if (game == null) return NotFound();
 
+            // 2️⃣ Incrementar contagem de compras
             game.Purchases++;
 
-            _db.Purchases.Add(new Purchase
+            // 3️⃣ Criar registro de compra
+            var purchase = new Purchase
             {
                 Id = Guid.NewGuid(),
                 GameId = id,
                 UserId = userId,
                 PurchasedAt = DateTime.UtcNow
-            });
+            };
+            _db.Purchases.Add(purchase);
 
+            // 4️⃣ Salvar alterações no banco
             await _db.SaveChangesAsync();
 
-            // Atualiza índice
+            // 5️⃣ Atualizar índice no Elasticsearch
             await _search.IndexGameAsync(new GameIndexModel
             {
                 Id = game.Id,
@@ -94,8 +104,56 @@ namespace Games.Api.Controllers
                 Purchases = game.Purchases
             });
 
+            // 6️⃣ Chamar Lambda para notificação
+            var payload = new
+            {
+                UserId = userId,
+                GameId = game.Id,
+                PurchasedAt = purchase.PurchasedAt
+            };
+
+            var request = new Amazon.Lambda.Model.InvokeRequest
+            {
+                FunctionName = "fcg-game-purchase-notification",
+                Payload = System.Text.Json.JsonSerializer.Serialize(payload)
+            };
+
+            await _lambdaClient.InvokeAsync(request);
+
             return Ok();
         }
+
+
+        //[HttpPost("{id}/purchase")]
+        //public async Task<IActionResult> Purchase(Guid id, [FromQuery] Guid userId)
+        //{
+        //    var game = await _db.Games.FindAsync(id);
+        //    if (game == null) return NotFound();
+
+        //    game.Purchases++;
+
+        //    _db.Purchases.Add(new Purchase
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        GameId = id,
+        //        UserId = userId,
+        //        PurchasedAt = DateTime.UtcNow
+        //    });
+
+        //    await _db.SaveChangesAsync();
+
+        //    // Atualiza índice
+        //    await _search.IndexGameAsync(new GameIndexModel
+        //    {
+        //        Id = game.Id,
+        //        Title = game.Title,
+        //        Genre = game.Genre,
+        //        Price = game.Price,
+        //        Purchases = game.Purchases
+        //    });
+
+        //    return Ok();
+        //}
 
         [HttpGet("search")]
         public async Task<IActionResult> Search([FromQuery] string query)
@@ -108,6 +166,12 @@ namespace Games.Api.Controllers
         public async Task<IActionResult> Popular()
         {
             var games = await _search.GetPopularGamesAsync();
+            return Ok(games);
+        }
+        [HttpGet("recommendations/{genre}")]
+        public async Task<IActionResult> Recommend(string genre)
+        {
+            var games = await _search.RecommendByGenreAsync(genre);
             return Ok(games);
         }
     }

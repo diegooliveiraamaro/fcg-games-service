@@ -43,4 +43,19 @@ public class GameSearchService : IGameSearchService
 
         return response.Documents;
     }
+    public async Task<IEnumerable<GameIndexModel>> RecommendByGenreAsync(string genre)
+    {
+        var response = await _client.SearchAsync<GameIndexModel>(s =>
+            s.Query(q =>
+                q.Match(m => m
+                    .Field(f => f.Genre)
+                    .Query(genre)
+                )
+            )
+            .Size(10)
+        );
+
+        return response.Documents;
+    }
+
 }
