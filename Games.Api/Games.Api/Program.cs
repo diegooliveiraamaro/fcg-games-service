@@ -3,6 +3,7 @@ using Games.Api.Infrastructure.Persistence;
 using Games.Api.Infrastructure.Search;
 using Microsoft.EntityFrameworkCore;
 using Nest;
+using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,13 +44,27 @@ var app = builder.Build();
 // MIDDLEWARE
 // =======================
 
-// Swagger SEM restrição de ambiente (ECS precisa disso)
-app.UseSwagger();
-app.UseSwaggerUI(c =>
+
+if (Debugger.IsAttached)
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Games API v1");
-    c.RoutePrefix = "swagger";
-});
+    // Swagger SEM restrição de ambiente (ECS precisa disso)
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Games API v1");
+        c.RoutePrefix = "swagger";
+    });
+}
+else
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint(
+            "/games/swagger/v1/swagger.json", "FCG Games API v1");
+        options.RoutePrefix = "swagger";
+    });
+}
 
 app.UseRouting();
 
