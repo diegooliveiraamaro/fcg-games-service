@@ -15,6 +15,44 @@
           }
         }
       },
+      "AWSSDK.EventBridge/4.0.5.12": {
+        "type": "package",
+        "dependencies": {
+          "AWSSDK.Core": "[4.0.3.8, 5.0.0)"
+        },
+        "compile": {
+          "lib/net8.0/AWSSDK.EventBridge.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/AWSSDK.EventBridge.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "AWSSDK.Extensions.NETCore.Setup/4.0.3.19": {
+        "type": "package",
+        "dependencies": {
+          "AWSSDK.Core": "4.0.3.8",
+          "Microsoft.Extensions.Configuration.Abstractions": "2.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "2.0.0"
+        },
+        "compile": {
+          "lib/net8.0/AWSSDK.Extensions.NETCore.Setup.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/AWSSDK.Extensions.NETCore.Setup.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0/AWSSDK.Extensions.NETCore.Setup.targets": {}
+        }
+      },
       "AWSSDK.Lambda/4.0.12.3": {
         "type": "package",
         "dependencies": {
@@ -1084,6 +1122,60 @@
         "lib/netstandard2.0/AWSSDK.Core.pdb",
         "lib/netstandard2.0/AWSSDK.Core.xml",
         "tools/account-management.ps1"
+      ]
+    },
+    "AWSSDK.EventBridge/4.0.5.12": {
+      "sha512": "wqfp6GzSwnv7JE1FIv9H2+LVxcK+YIkN/iIrEifpicDr+UUvSAcmgijHTVtXh6Mi0KjNDCg3pSXcyWCRrZppGA==",
+      "type": "package",
+      "path": "awssdk.eventbridge/4.0.5.12",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "analyzers/dotnet/cs/AWSSDK.EventBridge.CodeAnalysis.dll",
+        "analyzers/dotnet/cs/SharedAnalysisCode.dll",
+        "awssdk.eventbridge.4.0.5.12.nupkg.sha512",
+        "awssdk.eventbridge.nuspec",
+        "images/AWSLogo.png",
+        "lib/net472/AWSSDK.EventBridge.dll",
+        "lib/net472/AWSSDK.EventBridge.pdb",
+        "lib/net472/AWSSDK.EventBridge.xml",
+        "lib/net8.0/AWSSDK.EventBridge.dll",
+        "lib/net8.0/AWSSDK.EventBridge.pdb",
+        "lib/net8.0/AWSSDK.EventBridge.xml",
+        "lib/netcoreapp3.1/AWSSDK.EventBridge.dll",
+        "lib/netcoreapp3.1/AWSSDK.EventBridge.pdb",
+        "lib/netcoreapp3.1/AWSSDK.EventBridge.xml",
+        "lib/netstandard2.0/AWSSDK.EventBridge.dll",
+        "lib/netstandard2.0/AWSSDK.EventBridge.pdb",
+        "lib/netstandard2.0/AWSSDK.EventBridge.xml",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
+    "AWSSDK.Extensions.NETCore.Setup/4.0.3.19": {
+      "sha512": "OfK0hQVkysQNLG1aP6NlL8mhdtU8jwrpUDbdkWa9O7mjns/sBx5Fgmeb0Tbpos8KBD9baMxJAc/0Z0IjEaeanQ==",
+      "type": "package",
+      "path": "awssdk.extensions.netcore.setup/4.0.3.19",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ConfigurationSchema.json",
+        "awssdk.extensions.netcore.setup.4.0.3.19.nupkg.sha512",
+        "awssdk.extensions.netcore.setup.nuspec",
+        "buildTransitive/net8.0/AWSSDK.Extensions.NETCore.Setup.targets",
+        "buildTransitive/netcoreapp3.1/AWSSDK.Extensions.NETCore.Setup.targets",
+        "buildTransitive/netstandard2.0/AWSSDK.Extensions.NETCore.Setup.targets",
+        "images/AWSLogo.png",
+        "lib/net8.0/AWSSDK.Extensions.NETCore.Setup.dll",
+        "lib/net8.0/AWSSDK.Extensions.NETCore.Setup.pdb",
+        "lib/net8.0/AWSSDK.Extensions.NETCore.Setup.xml",
+        "lib/netcoreapp3.1/AWSSDK.Extensions.NETCore.Setup.dll",
+        "lib/netcoreapp3.1/AWSSDK.Extensions.NETCore.Setup.pdb",
+        "lib/netcoreapp3.1/AWSSDK.Extensions.NETCore.Setup.xml",
+        "lib/netstandard2.0/AWSSDK.Extensions.NETCore.Setup.dll",
+        "lib/netstandard2.0/AWSSDK.Extensions.NETCore.Setup.pdb",
+        "lib/netstandard2.0/AWSSDK.Extensions.NETCore.Setup.xml"
       ]
     },
     "AWSSDK.Lambda/4.0.12.3": {
@@ -3042,6 +3134,8 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "AWSSDK.EventBridge >= 4.0.5.12",
+      "AWSSDK.Extensions.NETCore.Setup >= 4.0.3.19",
       "AWSSDK.Lambda >= 4.0.12.3",
       "Microsoft.EntityFrameworkCore >= 8.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 8.0.0",
@@ -3102,6 +3196,14 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "AWSSDK.EventBridge": {
+            "target": "Package",
+            "version": "[4.0.5.12, )"
+          },
+          "AWSSDK.Extensions.NETCore.Setup": {
+            "target": "Package",
+            "version": "[4.0.3.19, )"
+          },
           "AWSSDK.Lambda": {
             "target": "Package",
             "version": "[4.0.12.3, )"

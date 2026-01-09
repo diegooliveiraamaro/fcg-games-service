@@ -1,3 +1,4 @@
+using Amazon.EventBridge;
 using Games.Api.Infrastructure.Events;
 using Games.Api.Infrastructure.Persistence;
 using Games.Api.Infrastructure.Search;
@@ -34,6 +35,9 @@ var client = new ElasticClient(settings);
 builder.Services.AddSingleton<IElasticClient>(client);
 builder.Services.AddScoped<IGameSearchService, GameSearchService>();
 
+builder.Services.AddAWSService<IAmazonEventBridge>();
+builder.Services.AddScoped<EventBridgePublisher>();
+
 // =======================
 // BUILD
 // =======================
@@ -60,8 +64,7 @@ else
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
-        options.SwaggerEndpoint(
-            "/games/swagger/v1/swagger.json", "FCG Games API v1");
+        options.SwaggerEndpoint("/games/swagger/v1/swagger.json", "FCG Games API v1");
         options.RoutePrefix = "swagger";
     });
 }

@@ -1,4 +1,5 @@
-﻿using Amazon.Lambda;
+﻿using Amazon.EventBridge;
+using Amazon.Lambda;
 using Games.Api.Application.DTOs.Games;
 using Games.Api.Domain;
 using Games.Api.Infrastructure.Persistence;
@@ -11,6 +12,7 @@ namespace Games.Api.Controllers
     [Route("games")]
     public class GamesController : ControllerBase
     {
+        private readonly ILogger<GamesController> _logger;
         private readonly GamesDbContext _db;
         private readonly IGameSearchService _search;
         private readonly IAmazonLambda _lambdaClient;
@@ -18,12 +20,13 @@ namespace Games.Api.Controllers
         public GamesController(
             GamesDbContext db,
             IGameSearchService search,
-            IAmazonLambda lambdaClient)
+            IAmazonLambda lambdaClient,
+            ILogger<GamesController> logger)
         {
             _db = db;
             _search = search;
             _lambdaClient = lambdaClient;
-            _lambdaClient = lambdaClient;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -71,17 +74,15 @@ namespace Games.Api.Controllers
             return CreatedAtAction(nameof(GetById), new { id = game.Id }, game);
         }
 
+
         [HttpPost("{id}/purchase")]
-        public async Task<IActionResult> Purchase(Guid id, [FromQuery] Guid userId)
+        public async Task<IActionResult> Purchase(Guid id, [FromQuery] Guid userId, [FromServices] IAmazonEventBridge eventBridge)
         {
-            // 1️⃣ Buscar o jogo
             var game = await _db.Games.FindAsync(id);
             if (game == null) return NotFound();
 
-            // 2️⃣ Incrementar contagem de compras
             game.Purchases++;
 
-            // 3️⃣ Criar registro de compra
             var purchase = new Purchase
             {
                 Id = Guid.NewGuid(),
@@ -89,12 +90,10 @@ namespace Games.Api.Controllers
                 UserId = userId,
                 PurchasedAt = DateTime.UtcNow
             };
-            _db.Purchases.Add(purchase);
 
-            // 4️⃣ Salvar alterações no banco
+            _db.Purchases.Add(purchase);
             await _db.SaveChangesAsync();
 
-            // 5️⃣ Atualizar índice no Elasticsearch
             await _search.IndexGameAsync(new GameIndexModel
             {
                 Id = game.Id,
@@ -104,24 +103,141 @@ namespace Games.Api.Controllers
                 Purchases = game.Purchases
             });
 
-            // 6️⃣ Chamar Lambda para notificação
-            var payload = new
+            // 🔔 Evento
+            var gamePurchasedEvent = new
             {
-                UserId = userId,
                 GameId = game.Id,
+                UserId = userId,
                 PurchasedAt = purchase.PurchasedAt
             };
 
-            var request = new Amazon.Lambda.Model.InvokeRequest
+            var request = new Amazon.EventBridge.Model.PutEventsRequest
             {
-                FunctionName = "fcg-game-purchase-notification",
-                Payload = System.Text.Json.JsonSerializer.Serialize(payload)
+                Entries = new List<Amazon.EventBridge.Model.PutEventsRequestEntry>
+                {
+                    new()
+                    {
+                        Source = "fcg.games",
+                        DetailType = "GamePurchased",
+                        Detail = System.Text.Json.JsonSerializer.Serialize(gamePurchasedEvent),
+                        EventBusName = "fcg-event-bus"
+                    }
+                }
             };
 
-            await _lambdaClient.InvokeAsync(request);
+            await eventBridge.PutEventsAsync(request);
 
             return Ok();
         }
+
+
+        //[HttpPost("{id}/purchase")]
+        //public async Task<IActionResult> Purchase(Guid id, [FromQuery] Guid userId)
+        //{
+        //    var game = await _db.Games.FindAsync(id);
+        //    if (game == null)
+        //        return NotFound();
+
+        //    game.Purchases++;
+
+        //    var purchase = new Purchase
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        GameId = id,
+        //        UserId = userId,
+        //        PurchasedAt = DateTime.UtcNow
+        //    };
+
+        //    _db.Purchases.Add(purchase);
+
+        //    await _db.SaveChangesAsync();
+
+        //    await _search.IndexGameAsync(new GameIndexModel
+        //    {
+        //        Id = game.Id,
+        //        Title = game.Title,
+        //        Genre = game.Genre,
+        //        Price = game.Price,
+        //        Purchases = game.Purchases
+        //    });
+
+        //    var payload = new
+        //    {
+        //        UserId = userId,
+        //        GameId = game.Id,
+        //        PurchasedAt = purchase.PurchasedAt
+        //    };
+
+        //    try
+        //    {
+        //        var request = new Amazon.Lambda.Model.InvokeRequest
+        //        {
+        //            FunctionName = "fcg-game-purchase-notification",
+        //            Payload = System.Text.Json.JsonSerializer.Serialize(payload)
+        //        };
+
+        //        await _lambdaClient.InvokeAsync(request);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Erro ao chamar Lambda de notificação");
+        //    }
+
+        //    return Ok();
+        //}
+
+
+        //[HttpPost("{id}/purchase")]
+        //public async Task<IActionResult> Purchase(Guid id, [FromQuery] Guid userId)
+        //{
+        //    // 1️⃣ Buscar o jogo
+        //    var game = await _db.Games.FindAsync(id);
+        //    if (game == null) return NotFound();
+
+        //    // 2️⃣ Incrementar contagem de compras
+        //    game.Purchases++;
+
+        //    // 3️⃣ Criar registro de compra
+        //    var purchase = new Purchase
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        GameId = id,
+        //        UserId = userId,
+        //        PurchasedAt = DateTime.UtcNow
+        //    };
+        //    _db.Purchases.Add(purchase);
+
+        //    // 4️⃣ Salvar alterações no banco
+        //    await _db.SaveChangesAsync();
+
+        //    // 5️⃣ Atualizar índice no Elasticsearch
+        //    await _search.IndexGameAsync(new GameIndexModel
+        //    {
+        //        Id = game.Id,
+        //        Title = game.Title,
+        //        Genre = game.Genre,
+        //        Price = game.Price,
+        //        Purchases = game.Purchases
+        //    });
+
+        //    // 6️⃣ Chamar Lambda para notificação
+        //    var payload = new
+        //    {
+        //        UserId = userId,
+        //        GameId = game.Id,
+        //        PurchasedAt = purchase.PurchasedAt
+        //    };
+
+        //    var request = new Amazon.Lambda.Model.InvokeRequest
+        //    {
+        //        FunctionName = "fcg-game-purchase-notification",
+        //        Payload = System.Text.Json.JsonSerializer.Serialize(payload)
+        //    };
+
+        //    await _lambdaClient.InvokeAsync(request);
+
+        //    return Ok();
+        //}
 
 
         //[HttpPost("{id}/purchase")]
