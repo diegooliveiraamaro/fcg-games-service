@@ -79,7 +79,7 @@ namespace Games.Api.Controllers
 
 
         [HttpPost("{id}/purchase")]
-        public async Task<IActionResult> Purchase(Guid id, [FromQuery] Guid userId, [FromServices] )
+        public async Task<IActionResult> Purchase(Guid id, [FromQuery] Guid userId, [FromServices] IAmazonEventBridge eventBridge)
         {
             var game = await _db.Games.FindAsync(id);
             if (game == null) return NotFound();
