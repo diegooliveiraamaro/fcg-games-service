@@ -1,3 +1,6 @@
+using Amazon.Lambda;
+using Amazon.Extensions.NETCore.Setup;
+using Amazon;
 using Amazon.EventBridge;
 using Games.Api.Infrastructure.Events;
 using Games.Api.Infrastructure.Persistence;
@@ -37,6 +40,9 @@ builder.Services.AddScoped<IGameSearchService, GameSearchService>();
 
 builder.Services.AddAWSService<IAmazonEventBridge>();
 builder.Services.AddScoped<EventBridgePublisher>();
+
+builder.Services.AddDefaultAWSOptions(builder.Configuration.GetAWSOptions());
+builder.Services.AddAWSService<IAmazonLambda>();
 
 // =======================
 // BUILD
