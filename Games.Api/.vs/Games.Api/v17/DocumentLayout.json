@@ -142,8 +142,7 @@
               "RelativeToolTip": "Games.Api\\DTOs\\Games\\CreateGameRequestDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T01:29:29.053Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T01:29:29.053Z"
             },
             {
               "$type": "Document",
@@ -179,8 +178,7 @@
               "RelativeToolTip": "Games.Api\\Domain\\Game.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T01:11:45.175Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T01:11:45.175Z"
             },
             {
               "$type": "Document",
@@ -190,7 +188,7 @@
               "RelativeDocumentMoniker": "Games.Api\\Controllers\\GamesController.cs",
               "ToolTip": "D:\\Projetos\\FCG\\fcg-games-service\\Games.Api\\Games.Api\\Controllers\\GamesController.cs",
               "RelativeToolTip": "Games.Api\\Controllers\\GamesController.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAQwCYAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAF8AAAAAAAAAAAAUwIcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-08T01:13:29.95Z",
               "EditorCaption": ""
@@ -205,8 +203,7 @@
               "RelativeToolTip": "Games.Api\\Program.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAAAAACwAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T01:12:36.512Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T01:12:36.512Z"
             },
             {
               "$type": "Document",
@@ -218,8 +215,7 @@
               "RelativeToolTip": "Games.Api\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-01-08T01:12:51.091Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T01:12:51.091Z"
             },
             {
               "$type": "Document",
