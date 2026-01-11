@@ -128,7 +128,13 @@ namespace Games.Api.Controllers
                 }
             };
 
-            await _eventBridge.PutEventsAsync(request);
+            //await _eventBridge.PutEventsAsync(request);
+
+            _logger.LogInformation("Publicando evento no EventBridge");
+
+            var response = await _eventBridge.PutEventsAsync(request);
+
+            _logger.LogInformation("Evento publicado. FailedCount: {count}", response.FailedEntryCount);
 
             return Ok();
         }     
