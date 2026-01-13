@@ -12,7 +12,6 @@ public class EventBridgePublisher
     {
         _eventBridge = eventBridge;
     }
-
     public async Task PublishAsync(IEvent @event)
     {
         var request = new PutEventsRequest
