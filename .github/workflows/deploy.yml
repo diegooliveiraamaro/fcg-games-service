@@ -1,67 +1,65 @@
-name: Deploy Game API
+name: Deploy to EKS
 
 on:
   push:
     branches:
       - main
 
+env:
+  AWS_REGION: sa-east-1
+  ECR_REPOSITORY: games-api
+  EKS_CLUSTER_NAME: fiap-eks-cluster
+  K8S_DEPLOYMENT_NAME: games-api
+  K8S_NAMESPACE: fcg
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout do código
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Checkout código
+        uses: actions/checkout@v3
 
-      # 2️⃣ Configurar credenciais da AWS
-      - name: Configure AWS credentials
+      - name: Configurar credenciais AWS
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ vars.AWS_REGION }}
+          aws-region: ${{ env.AWS_REGION }}
 
-      # 3️⃣ Login no Amazon ECR
-      - name: Login to Amazon ECR
-        uses: aws-actions/amazon-ecr-login@v2
-
-      # 4️⃣ Build da imagem Docker + Push para o ECR
-      - name: Build and push Docker image
-        env:
-          ECR_REPO: ${{ vars.ECR_GAMES_REPO }}
+      - name: Login no ECR
         run: |
-          echo "Obtendo URI do repositório ECR..."
-          IMAGE_URI=$(aws ecr describe-repositories \
-            --repository-names $ECR_REPO \
-            --query 'repositories[0].repositoryUri' \
-            --output text)
+          aws ecr get-login-password --region $AWS_REGION \
+          | docker login --username AWS \
+          --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com
 
-          echo "Imagem gerada: $IMAGE_URI"
+      - name: Build da imagem Docker
+        run: |
+          docker build -t $ECR_REPOSITORY:latest .
+          docker tag $ECR_REPOSITORY:latest \
+          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:latest
 
-          docker build \
-            -f Games.Api/Games.Api/Dockerfile \
-            -t $IMAGE_URI:latest \
-            Games.Api/Games.Api
+      - name: Push para ECR
+        run: |
+          docker push \
+          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:latest
 
-          docker push $IMAGE_URI:latest
+      - name: Atualizar kubeconfig
+        run: |
+          aws eks update-kubeconfig \
+          --region $AWS_REGION \
+          --name $EKS_CLUSTER_NAME
 
-          echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_ENV
+      - name: Aplicar manifests Kubernetes
+        run: |
+          kubectl apply -f k8s/
 
-      # 5️⃣ Renderizar nova Task Definition (atualiza a imagem)
-      - name: Render ECS task definition
-        id: render-task-def
-        uses: aws-actions/amazon-ecs-render-task-definition@v1
-        with:
-          task-definition: ecs-task-definition.json
-          container-name: fcg-games-container
-          image: ${{ env.IMAGE_URI }}:latest
+      - name: Atualizar imagem do Deployment
+        run: |
+          kubectl set image deployment/$K8S_DEPLOYMENT_NAME \
+          $K8S_DEPLOYMENT_NAME=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:latest \
+          -n $K8S_NAMESPACE
 
-      # 6️⃣ Deploy no ECS
-      - name: Deploy to ECS
-        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-        with:
-          task-definition: ${{ steps.render-task-def.outputs.task-definition }}
-          service: ${{ vars.ECS_SERVICE }}
-          cluster: ${{ vars.ECS_CLUSTER }}
-          wait-for-service-stability: true
+      - name: Aguardar rollout
+        run: |
+          kubectl rollout status deployment/$K8S_DEPLOYMENT_NAME -n $K8S_NAMESPACE

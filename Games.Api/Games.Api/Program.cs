@@ -30,7 +30,11 @@ builder.Services.AddScoped<EventStore>();
 // ELASTICSEARCH
 // =======================
 
-var elasticUri = builder.Configuration["Elastic:Uri"] ?? "http://localhost:9200";
+//var elasticUri = builder.Configuration["Elastic:Uri"] ?? "http://localhost:9200";
+
+var elasticUri = string.IsNullOrWhiteSpace(builder.Configuration["Elastic:Uri"])
+    ? "http://localhost:9200"
+    : builder.Configuration["Elastic:Uri"];
 
 var settings = new ConnectionSettings(new Uri(elasticUri))
     .DefaultIndex("games")
@@ -91,6 +95,12 @@ using (var scope = app.Services.CreateScope())
 {
     var elastic = scope.ServiceProvider.GetRequiredService<IElasticClient>();
     await GameSearchService.EnsureElasticIndexAsync(elastic);
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<GamesDbContext>();
+    db.Database.Migrate();
 }
 
 app.Run();

@@ -6,7 +6,7 @@ COPY . .
 RUN dotnet publish Games.Api.csproj -c Release -o /app/publish
 
 # Runtime
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine
 WORKDIR /app
 
 EXPOSE 80

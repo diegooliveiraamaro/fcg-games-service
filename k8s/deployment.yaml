@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: games-api
+  namespace: fcg
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: games-api
+  template:
+    metadata:
+      labels:
+        app: games-api
+    spec:
+      containers:
+        - name: games-api
+          image: 079079338334.dkr.ecr.sa-east-1.amazonaws.com/games-api:latest
+          ports:
+            - containerPort: 80
+
+          envFrom:
+            - configMapRef:
+                name: games-config
+            - secretRef:
+                name: games-secret
+
+          env:
+            - name: ConnectionStrings__Default
+              valueFrom:
+                secretKeyRef:
+                  name: games-secret
+                  key: CONNECTION_STRING
+
+            - name: Elastic__Uri
+              valueFrom:
+                configMapKeyRef:
+                  name: games-config
+                  key: ELASTIC_URI
