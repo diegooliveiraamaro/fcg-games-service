@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "D:\\Projetos\\FCG\\fcg-games-service\\Games.Api\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{2CCA72A3-2AE3-409F-BB58-FB08EE1B2B52}|Games.Api\\Games.Api.csproj|d:\\projetos\\fcg\\fcg-games-service\\games.api\\games.api\\controllers\\gamescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2CCA72A3-2AE3-409F-BB58-FB08EE1B2B52}|Games.Api\\Games.Api.csproj|solutionrelative:games.api\\controllers\\gamescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2CCA72A3-2AE3-409F-BB58-FB08EE1B2B52}|Games.Api\\Games.Api.csproj|d:\\projetos\\fcg\\fcg-games-service\\games.api\\games.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2CCA72A3-2AE3-409F-BB58-FB08EE1B2B52}|Games.Api\\Games.Api.csproj|solutionrelative:games.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2CCA72A3-2AE3-409F-BB58-FB08EE1B2B52}|Games.Api\\Games.Api.csproj|d:\\projetos\\fcg\\fcg-games-service\\games.api\\games.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{2CCA72A3-2AE3-409F-BB58-FB08EE1B2B52}|Games.Api\\Games.Api.csproj|solutionrelative:games.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
@@ -11,8 +19,8 @@
       "RelativeMoniker": "D:0:0:{2CCA72A3-2AE3-409F-BB58-FB08EE1B2B52}|Games.Api\\Games.Api.csproj|solutionrelative:games.api\\infrastructure\\search\\gamesearchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2CCA72A3-2AE3-409F-BB58-FB08EE1B2B52}|Games.Api\\Games.Api.csproj|d:\\projetos\\fcg\\fcg-games-service\\games.api\\games.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2CCA72A3-2AE3-409F-BB58-FB08EE1B2B52}|Games.Api\\Games.Api.csproj|solutionrelative:games.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2CCA72A3-2AE3-409F-BB58-FB08EE1B2B52}|Games.Api\\Games.Api.csproj|d:\\projetos\\fcg\\fcg-games-service\\games.api\\games.api\\infrastructure\\events\\eventbridgepublisher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2CCA72A3-2AE3-409F-BB58-FB08EE1B2B52}|Games.Api\\Games.Api.csproj|solutionrelative:games.api\\infrastructure\\events\\eventbridgepublisher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2CCA72A3-2AE3-409F-BB58-FB08EE1B2B52}|Games.Api\\Games.Api.csproj|d:\\projetos\\fcg\\fcg-games-service\\games.api\\games.api\\migrations\\gamesdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -33,14 +41,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{2CCA72A3-2AE3-409F-BB58-FB08EE1B2B52}|Games.Api\\Games.Api.csproj|d:\\projetos\\fcg\\fcg-games-service\\games.api\\games.api\\infrastructure\\events\\eventstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2CCA72A3-2AE3-409F-BB58-FB08EE1B2B52}|Games.Api\\Games.Api.csproj|solutionrelative:games.api\\infrastructure\\events\\eventstore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2CCA72A3-2AE3-409F-BB58-FB08EE1B2B52}|Games.Api\\Games.Api.csproj|d:\\projetos\\fcg\\fcg-games-service\\games.api\\games.api\\infrastructure\\events\\eventbridgepublisher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2CCA72A3-2AE3-409F-BB58-FB08EE1B2B52}|Games.Api\\Games.Api.csproj|solutionrelative:games.api\\infrastructure\\events\\eventbridgepublisher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2CCA72A3-2AE3-409F-BB58-FB08EE1B2B52}|Games.Api\\Games.Api.csproj|d:\\projetos\\fcg\\fcg-games-service\\games.api\\games.api\\controllers\\gamescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2CCA72A3-2AE3-409F-BB58-FB08EE1B2B52}|Games.Api\\Games.Api.csproj|solutionrelative:games.api\\controllers\\gamescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,23 +50,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "GameSearchService.cs",
               "DocumentMoniker": "D:\\Projetos\\FCG\\fcg-games-service\\Games.Api\\Games.Api\\Infrastructure\\Search\\GameSearchService.cs",
               "RelativeDocumentMoniker": "Games.Api\\Infrastructure\\Search\\GameSearchService.cs",
               "ToolTip": "D:\\Projetos\\FCG\\fcg-games-service\\Games.Api\\Games.Api\\Infrastructure\\Search\\GameSearchService.cs",
               "RelativeToolTip": "Games.Api\\Infrastructure\\Search\\GameSearchService.cs",
-              "ViewState": "AgIAAFAAAAAAAAAAAAAqwF0AAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAAEwAAAAAAAAAAADgv28AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-17T14:40:24.457Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "GamesDbContextModelSnapshot.cs",
               "DocumentMoniker": "D:\\Projetos\\FCG\\fcg-games-service\\Games.Api\\Games.Api\\Migrations\\GamesDbContextModelSnapshot.cs",
               "RelativeDocumentMoniker": "Games.Api\\Migrations\\GamesDbContextModelSnapshot.cs",
@@ -78,7 +78,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "20260108022854_AddPurchasesToGame.Designer.cs",
               "DocumentMoniker": "D:\\Projetos\\FCG\\fcg-games-service\\Games.Api\\Games.Api\\Migrations\\20260108022854_AddPurchasesToGame.Designer.cs",
               "RelativeDocumentMoniker": "Games.Api\\Migrations\\20260108022854_AddPurchasesToGame.Designer.cs",
@@ -90,20 +90,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\Projetos\\FCG\\fcg-games-service\\Games.Api\\Games.Api\\appsettings.json",
               "RelativeDocumentMoniker": "Games.Api\\appsettings.json",
               "ToolTip": "D:\\Projetos\\FCG\\fcg-games-service\\Games.Api\\Games.Api\\appsettings.json",
               "RelativeToolTip": "Games.Api\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAC7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2026-02-17T13:42:24.072Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "GamePurchasedEvent.cs",
               "DocumentMoniker": "D:\\Projetos\\FCG\\fcg-games-service\\Games.Api\\Games.Api\\Infrastructure\\Events\\GamePurchasedEvent.cs",
               "RelativeDocumentMoniker": "Games.Api\\Infrastructure\\Events\\GamePurchasedEvent.cs",
@@ -115,7 +115,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "GameCreatedEvent.cs",
               "DocumentMoniker": "D:\\Projetos\\FCG\\fcg-games-service\\Games.Api\\Games.Api\\Infrastructure\\Events\\GameCreatedEvent.cs",
               "RelativeDocumentMoniker": "Games.Api\\Infrastructure\\Events\\GameCreatedEvent.cs",
@@ -127,7 +127,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "EventStore.cs",
               "DocumentMoniker": "D:\\Projetos\\FCG\\fcg-games-service\\Games.Api\\Games.Api\\Infrastructure\\Events\\EventStore.cs",
               "RelativeDocumentMoniker": "Games.Api\\Infrastructure\\Events\\EventStore.cs",
@@ -139,39 +139,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 4,
               "Title": "EventBridgePublisher.cs",
               "DocumentMoniker": "D:\\Projetos\\FCG\\fcg-games-service\\Games.Api\\Games.Api\\Infrastructure\\Events\\EventBridgePublisher.cs",
               "RelativeDocumentMoniker": "Games.Api\\Infrastructure\\Events\\EventBridgePublisher.cs",
               "ToolTip": "D:\\Projetos\\FCG\\fcg-games-service\\Games.Api\\Games.Api\\Infrastructure\\Events\\EventBridgePublisher.cs",
               "RelativeToolTip": "Games.Api\\Infrastructure\\Events\\EventBridgePublisher.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-13T23:39:29.015Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 0,
               "Title": "GamesController.cs",
               "DocumentMoniker": "D:\\Projetos\\FCG\\fcg-games-service\\Games.Api\\Games.Api\\Controllers\\GamesController.cs",
               "RelativeDocumentMoniker": "Games.Api\\Controllers\\GamesController.cs",
-              "ToolTip": "D:\\Projetos\\FCG\\fcg-games-service\\Games.Api\\Games.Api\\Controllers\\GamesController.cs",
-              "RelativeToolTip": "Games.Api\\Controllers\\GamesController.cs",
-              "ViewState": "AgIAAGcAAAAAAAAAAAAcwJ0AAAAMAAAAAAAAAA==",
+              "ToolTip": "D:\\Projetos\\FCG\\fcg-games-service\\Games.Api\\Games.Api\\Controllers\\GamesController.cs*",
+              "RelativeToolTip": "Games.Api\\Controllers\\GamesController.cs*",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABcAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T01:13:29.95Z"
+              "WhenOpened": "2026-01-08T01:13:29.95Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Projetos\\FCG\\fcg-games-service\\Games.Api\\Games.Api\\Program.cs",
               "RelativeDocumentMoniker": "Games.Api\\Program.cs",
               "ToolTip": "D:\\Projetos\\FCG\\fcg-games-service\\Games.Api\\Games.Api\\Program.cs",
               "RelativeToolTip": "Games.Api\\Program.cs",
-              "ViewState": "AgIAAD4AAAAAAAAAAAASwEUAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T01:12:36.512Z"
+              "WhenOpened": "2026-01-08T01:12:36.512Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -30,7 +30,7 @@ builder.Services.AddScoped<EventStore>();
 // ELASTICSEARCH
 // =======================
 
-//var elasticUri = builder.Configuration["Elastic:Uri"] ?? "http://localhost:9200";
+
 
 var elasticUri = string.IsNullOrWhiteSpace(builder.Configuration["Elastic:Uri"])
     ? "http://localhost:9200"
@@ -50,15 +50,6 @@ var client = new ElasticClient(settings);
 builder.Services.AddSingleton<IElasticClient>(client);
 builder.Services.AddScoped<IGameSearchService, GameSearchService>();
 
-// =======================
-// AWS
-// =======================
-
-//builder.Services.AddAWSService<IAmazonEventBridge>();
-//builder.Services.AddScoped<EventBridgePublisher>();
-
-//builder.Services.AddDefaultAWSOptions(builder.Configuration.GetAWSOptions());
-//builder.Services.AddAWSService<IAmazonLambda>();
 
 // =======================
 // BUILD
@@ -66,23 +57,13 @@ builder.Services.AddScoped<IGameSearchService, GameSearchService>();
 
 var app = builder.Build();
 
-// =======================
-// MIDDLEWARE
-// =======================
 
-//app.UseSwagger();
-//app.UseSwaggerUI(options =>
-//{
-//    options.SwaggerEndpoint("/swagger/v1/swagger.json", "FCG Games API v1");
-//    options.RoutePrefix = "swagger";
-//});
 
 // =======================
 // MIDDLEWARE
 // =======================
 
 app.UsePathBase("/games");
-
 app.UseSwagger();
 
 app.UseSwaggerUI(c =>

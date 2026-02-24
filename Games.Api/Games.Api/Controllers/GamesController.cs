@@ -15,19 +15,19 @@ namespace Games.Api.Controllers
         private readonly ILogger<GamesController> _logger;
         private readonly GamesDbContext _db;
         private readonly IGameSearchService _search;
-        private readonly IAmazonLambda _lambdaClient;
+       // private readonly IAmazonLambda _lambdaClient;
         private readonly IAmazonEventBridge _eventBridge;
 
         public GamesController(
             GamesDbContext db,
             IGameSearchService search,
-            IAmazonLambda lambdaClient,
+           // IAmazonLambda lambdaClient,
             ILogger<GamesController> logger,
             IAmazonEventBridge eventBridge)
         {
             _db = db;
             _search = search;
-            _lambdaClient = lambdaClient;
+           // _lambdaClient = lambdaClient;
             _logger = logger;
             _eventBridge = eventBridge;
         }
