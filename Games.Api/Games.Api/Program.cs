@@ -94,7 +94,15 @@ app.Urls.Add("http://0.0.0.0:80");
 using (var scope = app.Services.CreateScope())
 {
     var elastic = scope.ServiceProvider.GetRequiredService<IElasticClient>();
-    await GameSearchService.EnsureElasticIndexAsync(elastic);
+    
+    try
+    {
+        await GameSearchService.EnsureElasticIndexAsync(client);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Elastic não disponível. Continuando sem busca.");
+    }
 }
 
 using (var scope = app.Services.CreateScope())
