@@ -54,11 +54,11 @@ builder.Services.AddScoped<IGameSearchService, GameSearchService>();
 // AWS
 // =======================
 
-builder.Services.AddAWSService<IAmazonEventBridge>();
-builder.Services.AddScoped<EventBridgePublisher>();
+//builder.Services.AddAWSService<IAmazonEventBridge>();
+//builder.Services.AddScoped<EventBridgePublisher>();
 
-builder.Services.AddDefaultAWSOptions(builder.Configuration.GetAWSOptions());
-builder.Services.AddAWSService<IAmazonLambda>();
+//builder.Services.AddDefaultAWSOptions(builder.Configuration.GetAWSOptions());
+//builder.Services.AddAWSService<IAmazonLambda>();
 
 // =======================
 // BUILD
