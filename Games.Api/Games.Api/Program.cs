@@ -70,11 +70,22 @@ var app = builder.Build();
 // MIDDLEWARE
 // =======================
 
-app.UseSwagger();
-app.UseSwaggerUI(options =>
+//app.UseSwagger();
+//app.UseSwaggerUI(options =>
+//{
+//    options.SwaggerEndpoint("/swagger/v1/swagger.json", "FCG Games API v1");
+//    options.RoutePrefix = "swagger";
+//});
+
+app.UseSwagger(c =>
 {
-    options.SwaggerEndpoint("/swagger/v1/swagger.json", "FCG Games API v1");
-    options.RoutePrefix = "swagger";
+    c.RouteTemplate = "games/swagger/{documentName}/swagger.json";
+});
+
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/games/swagger/v1/swagger.json", "Games API v1");
+    c.RoutePrefix = "games/swagger";
 });
 
 app.UseRouting();
