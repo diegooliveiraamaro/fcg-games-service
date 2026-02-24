@@ -77,15 +77,18 @@ var app = builder.Build();
 //    options.RoutePrefix = "swagger";
 //});
 
-app.UseSwagger(c =>
-{
-    c.RouteTemplate = "games/swagger/{documentName}/swagger.json";
-});
+// =======================
+// MIDDLEWARE
+// =======================
+
+app.UsePathBase("/games");
+
+app.UseSwagger();
 
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/games/swagger/v1/swagger.json", "Games API v1");
-    c.RoutePrefix = "games/swagger";
+    c.RoutePrefix = "swagger";
 });
 
 app.UseRouting();
