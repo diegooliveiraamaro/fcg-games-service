@@ -16,7 +16,7 @@ namespace Games.Api.Controllers
         private readonly GamesDbContext _db;
         private readonly IGameSearchService _search;
        // private readonly IAmazonLambda _lambdaClient;
-        private readonly IAmazonEventBridge _eventBridge;
+        //private readonly IAmazonEventBridge _eventBridge;
 
         public GamesController(
             GamesDbContext db,
@@ -29,7 +29,7 @@ namespace Games.Api.Controllers
             _search = search;
            // _lambdaClient = lambdaClient;
             _logger = logger;
-            _eventBridge = eventBridge;
+            //_eventBridge = eventBridge;
         }
 
         [HttpGet]
