@@ -68,7 +68,7 @@ app.UseSwagger();
 
 app.UseSwaggerUI(c =>
 {
-    //c.SwaggerEndpoint("/swagger/v1/swagger.json", "Games API v1");
+    // c.SwaggerEndpoint("/swagger/v1/swagger.json", "Games API v1");
     c.SwaggerEndpoint("/games/swagger/v1/swagger.json", "Games API v1");
     c.RoutePrefix = "swagger";
 });
