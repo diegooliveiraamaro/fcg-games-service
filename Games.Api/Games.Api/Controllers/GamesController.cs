@@ -72,7 +72,7 @@ namespace Games.Api.Controllers
                 Purchases = 0
             };
 
-            await _search.IndexGameAsync(indexModel);
+         //   await _search.IndexGameAsync(indexModel);
 
             return CreatedAtAction(nameof(GetById), new { id = game.Id }, game);
         }
@@ -128,7 +128,7 @@ namespace Games.Api.Controllers
                 }
             };
 
-            await _eventBridge.PutEventsAsync(request);
+          //  await _eventBridge.PutEventsAsync(request);
 
             //_logger.LogInformation("Publicando evento no EventBridge");
 
